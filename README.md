@@ -196,6 +196,52 @@ state = update_atom_state(state, engine=engine, pool=pool)
 
 ---
 
+## Observer × 창발 — 24개 레이어와의 연결
+
+> 전체 상세 분석: [OBSERVER_CREATIVITY_ANALYSIS.md](./OBSERVER_CREATIVITY_ANALYSIS.md)
+
+### 신호 흐름 요약
+
+```
+ENGINE_HUB Observer L1~L24
+         │  Ω ∈ [0,1]  →  ObserverCognitiveLayer
+         │
+    self_regulation_signal  (L4·L8·L12·L14)  ← 창의 트리거
+    warning_signal          (L6·L9·L18·L19)  ← 안전 게이트 A
+    recursion_risk_signal   (L17·L23)         ← 안전 게이트 B
+    self_defense_signal     (L5·L13·L16·L24)  ← 안전 게이트 C
+         │
+         ▼  + observer_verdict → σ_q (양자 요동 스케일)
+         │
+    IdeaEngine: 궤도 이탈 판단 + 양자 요동 + 창발 점수
+         │
+    orbit_mode: LOCKED / ORBIT / PRECESSION / DEVIATION / EMERGENCE
+```
+
+### 창의 트리거 레이어 (L4·L8·L12·L14)
+
+| 레이어 | 원리 | 창의 연결 |
+|--------|------|---------|
+| **L4 Boltzmann** | 엔트로피 S=k ln W | 무질서 증가 = 창의 압력 |
+| **L8 Heisenberg** | 불확정성 [x̂,p̂]=iℏ | **양자 요동 σ_q와 직접 연결** |
+| **L12 Noether** | 대칭·보존 | 대칭 파괴 = 창발의 씨앗 |
+| **L14 Yang-Mills** | 게이지장 | 비아벨 결합 = 복잡 창발 |
+
+> L8 Heisenberg의 불확정성 원리가 v0.2 양자 요동 모델 `q ~ N(0, σ_q)`과
+> 개념적으로 직접 연결된다. "측정할 수 없는 구간"이 창의가 발생하는 지점.
+
+### 창발 최적 구간 — 혼돈의 가장자리
+
+```
+너무 질서정연 (HEALTHY + 높은 자기조절)  →  창의 없음
+너무 무질서   (CRITICAL)                →  창의 차단
+       ↕
+  FRAGILE 구간  (Ω 0.50~0.69)           →  σ_q=0.15, 창발 최대
+  = "edge of chaos" 수리 유비
+```
+
+---
+
 ## 설치·의존성
 
 - **Python**: 3.8+
@@ -242,9 +288,18 @@ idea/
 
 ## 버전·문서
 
-- **버전**: 0.2.0
+- **버전**: 0.2.1
+- **Observer × 창발 분석**: [OBSERVER_CREATIVITY_ANALYSIS.md](./OBSERVER_CREATIVITY_ANALYSIS.md)
 - **PHAM 블록체인 서명**: [BLOCKCHAIN_INFO.md](./BLOCKCHAIN_INFO.md)
 - **상위 설계**: `ATOM_개인로봇_창의_창발_설계_분석.md`
+
+### 버전 이력
+
+| 버전 | 날짜 | 내용 |
+|------|------|------|
+| **v0.2.1** | 2026-03-16 | OBSERVER_CREATIVITY_ANALYSIS.md 추가 — 24개 레이어 × 창발 전체 분석, README Observer 연결 섹션 추가 |
+| **v0.2.0** | 2026-03-16 | 양자 요동(Box-Muller), 옵저버 연동(σ_q), orbit_mode 5단계, 창발 점수, pick_weighted(), 테스트 29개 |
+| **v0.1.0** | 2026-03-16 | 최초 릴리즈 — IdeaPool, IdeaEngine, Atom adapter, 복합 안전 조건, PHAM 서명 |
 
 ---
 

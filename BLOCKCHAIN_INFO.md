@@ -47,6 +47,7 @@ idea/
 
 | 버전 | 날짜 | 내용 |
 |------|------|------|
+| **v0.2.1** | 2026-03-16 | OBSERVER_CREATIVITY_ANALYSIS.md 추가 — 24개 레이어 × 창발 전체 분석, README Observer 섹션 추가 |
 | **v0.2.0** | 2026-03-16 | 양자 요동(Box-Muller), 옵저버 연동(σ_q 자동), orbit_mode 5단계, 창발 점수, 불확실성 지수, pick_weighted(), atom_bridge v0.2 extensions, 테스트 29개 |
 | **v0.1.0** | 2026-03-16 | 최초 릴리즈 — IdeaPool, IdeaEngine, Atom adapter, 복합 안전 조건, JSON save/load, PHAM 서명 |
 
@@ -77,5 +78,5 @@ idea/
 
 **최초 작성일**: 2026-03-16
 **최종 갱신**: 2026-03-16
-**버전**: 0.2.0
+**버전**: 0.2.1
 **작성자**: GNJz (Qquarts)
