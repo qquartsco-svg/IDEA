@@ -7,12 +7,8 @@ extension에 orbit_deviation_active, current_idea, force_explore, idea_used_step
 from __future__ import annotations
 from typing import Any, Optional
 
-try:
-    from ..idea_engine import IdeaEngine
-    from ..idea_pool import IdeaPool
-except ImportError:
-    from idea.idea_engine import IdeaEngine
-    from idea.idea_pool import IdeaPool
+from ..idea_engine import IdeaEngine
+from ..idea_pool import IdeaPool
 
 
 def update_atom_state(

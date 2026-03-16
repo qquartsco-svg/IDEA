@@ -7,8 +7,8 @@ import tempfile
 from pathlib import Path
 
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from idea import IdeaPool
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+from ionia.idea import IdeaPool
 
 
 def test_empty():

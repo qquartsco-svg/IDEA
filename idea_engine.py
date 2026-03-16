@@ -41,7 +41,7 @@ from typing import Any, Optional, Tuple
 try:
     from .idea_pool import IdeaPool
 except ImportError:
-    from idea.idea_pool import IdeaPool
+    from idea_pool import IdeaPool  # type: ignore[no-redef]  # 독립 레포 직접 실행
 
 
 # ── orbit_mode 상수 ────────────────────────────────────────────────────────

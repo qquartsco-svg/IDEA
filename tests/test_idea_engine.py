@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from idea import IdeaPool, IdeaEngine
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+from ionia.idea import IdeaPool, IdeaEngine
 
 
 class _State:
