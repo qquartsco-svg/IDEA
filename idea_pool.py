@@ -15,7 +15,15 @@ import json
 import random
 import time
 from pathlib import Path
-from typing import Any, List, Optional, Union
+from typing import Any, List, Optional, Tuple, Union
+
+
+def _float_val(val: Any, default: float = 0.5) -> float:
+    """None-safe float 변환."""
+    try:
+        return float(val) if val is not None else default
+    except (TypeError, ValueError):
+        return default
 
 # 항목 타입/소스 상수 (저장 규칙)
 SOURCE_LIBRARY = "library"
@@ -109,7 +117,7 @@ class IdeaPool:
 
     def pick_one(self, max_len: Optional[int] = None) -> Optional[str]:
         """
-        풀에서 하나를 무작위로 선택해 텍스트만 반환.
+        풀에서 하나를 무작위로 선택해 텍스트만 반환 (uniform random).
         max_len 넘으면 잘라서 반환.
         """
         if not self._entries:
@@ -118,6 +126,53 @@ class IdeaPool:
         text = e.get("text", "")
         if max_len is not None and len(text) > max_len:
             text = text[:max_len].rstrip() + "..."
+        return text
+
+    def pick_weighted(
+        self,
+        max_len: Optional[int] = None,
+        return_entry: bool = False,
+    ) -> "Union[Optional[str], Tuple[Optional[str], Optional[dict]]]":
+        """
+        가중 무작위 선택: w = confidence × feasibility × (1 + novelty).
+
+        메타데이터 없는 항목 기본 가중치:
+            0.5 × 0.5 × (1 + 0.5) = 0.375
+
+        return_entry=True 이면 (text, entry_dict) 튜플 반환.
+        풀이 비어 있으면 (None, None) 또는 None 반환.
+
+        v0.2.0 신규 — 창발 점수 계산에 활용됨.
+        """
+        if not self._entries:
+            return (None, None) if return_entry else None
+
+        # 가중치 계산
+        weights: List[float] = []
+        for e in self._entries:
+            c = _float_val(e.get("confidence"),  0.5)
+            f = _float_val(e.get("feasibility"), 0.5)
+            n = _float_val(e.get("novelty"),      0.5)
+            w = c * f * (1.0 + n)
+            weights.append(max(w, 1e-6))
+
+        # 가중 누적합으로 선택
+        total  = sum(weights)
+        r      = random.random() * total
+        cumsum = 0.0
+        selected = self._entries[-1]
+        for entry, w in zip(self._entries, weights):
+            cumsum += w
+            if r <= cumsum:
+                selected = entry
+                break
+
+        text = selected.get("text", "")
+        if max_len is not None and len(text) > max_len:
+            text = text[:max_len].rstrip() + "..."
+
+        if return_entry:
+            return (text, selected)
         return text
 
     def to_list(self) -> List[Union[str, dict]]:

@@ -31,9 +31,26 @@ def update_atom_state(
     if engine is None:
         engine = IdeaEngine()
     result = engine.step(state, pool=pool)
+
+    # ── v0.1 호환 extensions ──────────────────────────────────────────
     state.set_extension("orbit_deviation_active", result["orbit_deviation_active"])
-    state.set_extension("current_idea", result["current_idea"])
-    state.set_extension("force_explore", result["force_explore"])
+    state.set_extension("current_idea",           result["current_idea"])
+    state.set_extension("force_explore",          result["force_explore"])
     if result.get("idea_used_step") is not None:
         state.set_extension("idea_used_step", result["idea_used_step"])
+
+    # ── v0.2 신규 extensions ──────────────────────────────────────────
+    for key in (
+        "orbit_mode",
+        "quantum_noise",
+        "delta_raw",
+        "delta_eff",
+        "uncertainty_index",
+        "emergence_score",
+        "emergence_event",
+        "observer_verdict",
+    ):
+        if key in result:
+            state.set_extension(key, result[key])
+
     return state

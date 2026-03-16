@@ -20,7 +20,7 @@ from __future__ import annotations
 from idea.idea_pool import IdeaPool
 from idea.idea_engine import IdeaEngine
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = ["IdeaPool", "IdeaEngine", "update_atom_state"]
 
 
