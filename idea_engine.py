@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
 """
-idea_engine v0.2.0 — 궤도 이탈 판단 + 이데아 선택 엔진
+idea_engine v0.2.0 — 궤도 이탈 판단 + 이데아 참여 엔진
+
+【형이상학 ↔ 형이하학 구조】
+  형이상학 레이어 (이데아계):  IdeaPool — 보편 형상의 저장소 (이 파일 밖)
+  형이하학 레이어 (현상계):    IdeaEngine — 현상계 동역학 계산 (이 파일)
+  다리:                       pick_weighted() — 참여(μέθεξις), 이데아를 현상에 끌어들임
+
+  현상계 신호: state_vector / self_regulation / σ_q / δ_eff / orbit_mode
+  이데아계→현상계: current_idea (이데아의 언어적 근사) → motor_command (행동·물질화)
 
 v0.2 신규:
   - 양자 요동 (quantum noise): q ~ N(0, σ_q), Box-Muller 변환
+      → 현상계의 불확정성 (하이젠베르크 유비)
   - 옵저버 연동: observer_verdict → σ_q 자동 결정
       HEALTHY→0.03 / STABLE→0.05 / FRAGILE→0.15 / CRITICAL→0.00 (완전 잠금)
   - orbit_mode 5단계: LOCKED / ORBIT / PRECESSION / DEVIATION / EMERGENCE
-      - PRECESSION: 양자 요동으로 미세 흔들림 (이탈 미만 — 창의 전조)
-      - EMERGENCE: 궤도 이탈 + 창발 이벤트 동시 발생
+      동굴의 비유 대응:
+        LOCKED     = 사슬에 묶여 그림자만 봄 (CRITICAL)
+        ORBIT      = 동굴 속 그림자 세계 (현상만 처리)
+        PRECESSION = 불빛 감지, 고개 돌림 (창의 전조)
+        DEVIATION  = 동굴 밖으로 나가기 시작 (이데아 참여 활성)
+        EMERGENCE  = 태양(선의 이데아) 목격 (창발 이벤트)
   - 창발 점수 (emergence_score):
       E = confidence × feasibility × (1 + novelty) / 2.0  ∈ [0, 1]
       emergence_event = True if E ≥ emergence_threshold (기본 0.60)
-  - 불확실성 지수 (uncertainty_index):
-      U = σ_q × (1 − self_reg + |q|)
-  - δ_raw (결정론적 편차), δ_eff = δ_raw + q (양자 요동 포함)
-  - pick_weighted 우선 사용: 신뢰도·타당성·참신도 가중 선택
+  - 불확실성 지수: U = σ_q × (1 − self_reg + |q|)
+  - δ_raw (결정론적 편차), δ_eff = δ_raw + q
 
 v0.1 하위 호환:
   orbit_deviation_active / current_idea / force_explore / idea_used_step 유지.
-  creative_mode=True 경로는 여전히 결정론적.
 """
 
 from __future__ import annotations

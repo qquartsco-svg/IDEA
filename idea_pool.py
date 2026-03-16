@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-idea_pool — 이데아(형상) 저장소
+idea_pool — 이데아계(형이상학) 저장소
 
-플라톤적 이데아 유비: 보편·재사용 가능한 패턴(문장·요약)을 보관하고,
-궤도 이탈 시 하나를 골라 "현재 맥락에 참여"시키는 풀.
+【플라톤 개념 정확 대응】
+  IdeaPool 전체  = 이데아계 (κόσμος νοητός) — 보편·불변 형상들의 저장소
+  각 entry       = 이데아의 언어적 근사값 (이데아 자체는 언어 이전의 순수 형상)
+  add()          = 상기(ἀνάμνησις) — 이데아를 텍스트로 '기억에 등록'
+  pick_weighted()= 참여(μέθεξις)   — 현상계(IdeaEngine)가 이데아를 끌어당기는 행위
+  confidence     = 그 텍스트 근사값이 이데아에 얼마나 가까운지의 척도
 
 저장 단위: str 또는 dict. dict 권장 필드:
   text, source (library|recall|observer-trigger), type (metaphor|solution|experiment|question),
