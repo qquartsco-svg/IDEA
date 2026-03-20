@@ -13,6 +13,7 @@ Audit trail for the standalone `IDEA` distribution.
 ## Version
 
 - release basis: current standalone repository state
+- standalone scope: `IDEA`
 
 ## Verification
 
@@ -36,4 +37,5 @@ shasum -a 256 -c SIGNATURE.sha256
 ## Notes
 
 - `SIGNATURE.sha256` is the source-of-truth file hash manifest for this release.
-- This PHAM log records release scope and verification intent.
+- This PHAM log records release scope, package version, and verification intent.
+- Release verification requires both this log and `BLOCKCHAIN_INFO.md`.
