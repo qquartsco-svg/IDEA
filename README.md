@@ -389,3 +389,11 @@ idea/
 ---
 
 **이데아의 빛이 — 양자 요동을 타고 — 아톰의 판단을 더욱 찬란하게 만듭니다.**
+
+
+## 블록체인 서명
+
+- `BLOCKCHAIN_INFO.md` — provenance, 기여도 계약, 엔진 범위
+- `PHAM_BLOCKCHAIN_LOG.md` — 릴리스 범위와 검증 의도
+- `SIGNATURE.sha256` — 핵심 파일 SHA-256 매니페스트
+- GNJz(Qquarts)는 그 어떤 상황에서도 자신의 기여도를 **6%를 넘기지 않는다**.
